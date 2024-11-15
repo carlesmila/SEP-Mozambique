@@ -1,6 +1,6 @@
 # Predicting household socioeconomic position in Mozambique using satellite and household imagery
 
-This repository contains the code for the article "Predicting household socioeconomic position in Mozambique using satellite and household imagery" by C. Milà, T. Matsena, E. Jamisse, J. Nunes, Q. Bassat, P. Petrone, E. Sicuri, C. Sacoor, and C. Tonne. 
+This repository contains the code for the article "Predicting household socioeconomic position in Mozambique using satellite and household imagery" by C. Milà, T. Matsena, E. Jamisse, J. Nunes, Q. Bassat, P. Petrone, E. Sicuri, C. Sacoor, and C. Tonne. A preprint of the article is available on [arXiv](http://arxiv.org/abs/2411.08934).
 
 The content of this repository is organised according to the workflow of the study, where files are numbered in a sequential fashion. 
 
