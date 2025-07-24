@@ -13,13 +13,15 @@ CNNs and another with features extracted from the CNN without finetuning
 import os
 import pandas as pd
 
+os.chdir('/PROJECTES/AIRPOLLUTION/carles/SEP')
+
 
 #%% Fine-tuned
 
 # Outcomes
 outcomes = pd.read_csv("data/clean/indicators.csv")
-outcomes = outcomes.loc[:, ['household', 'exp_all', 'inc_all', 'assets']]
-outcomes.columns = ['household', 'exp_true', 'inc_true', 'assets_true']
+outcomes = outcomes.loc[:, ['household', 'exp_all', 'inc_all', 'assets', 'exp_cat3', 'inc_cat3', 'assets_cat3']]
+outcomes.columns = ['household', 'exp_true', 'inc_true', 'assets_true', 'exp_cat3', 'inc_cat3', 'assets_cat3']
 
 # Data split
 split = pd.read_csv("data/clean/datasplit.csv")
@@ -34,7 +36,7 @@ for it in imgtype:
     print('Processing ' + it)
     
     # Read features
-    it_df = pd.read_csv('output/features_tuning/' + it + '_features.csv')
+    it_df = pd.read_csv('output_post/features_tuning/' + it + '_features.csv')
     it_df.columns = ['household'] + [it + '_' + str(k+1) for k in range(30)]
     it_traindf = it_df.loc[it_df['household'].isin(traindf['household'])]
     it_testdf = it_df.loc[it_df['household'].isin(testdf['household'])]
@@ -55,8 +57,8 @@ traindf = traindf.merge(alltrain_df, how = 'inner', on = 'household')
 testdf = testdf.merge(alltest_df, how = 'inner', on = 'household')
 
 # Write to disk and clean
-traindf.to_csv('output/supervised_tuning/traindata.csv', index = False)
-testdf.to_csv('output/supervised_tuning/testdata.csv', index = False)
+traindf.to_csv('output/data_tuning/traindata.csv', index = False)
+testdf.to_csv('output/data_tuning/testdata.csv', index = False)
 del(alldf, alltest_df, alltrain_df, imgtype, it, outcomes, split, testdf, traindf)
 
 
@@ -65,8 +67,8 @@ del(alldf, alltest_df, alltrain_df, imgtype, it, outcomes, split, testdf, traind
 
 # Outcomes
 outcomes = pd.read_csv("data/clean/indicators.csv")
-outcomes = outcomes.loc[:, ['household', 'exp_all', 'inc_all', 'assets']]
-outcomes.columns = ['household', 'exp_true', 'inc_true', 'assets_true']
+outcomes = outcomes.loc[:, ['household', 'exp_all', 'inc_all', 'assets', 'exp_cat3', 'inc_cat3', 'assets_cat3']]
+outcomes.columns = ['household', 'exp_true', 'inc_true', 'assets_true', 'exp_cat3', 'inc_cat3', 'assets_cat3']
 
 # Data split
 split = pd.read_csv("data/clean/datasplit.csv")
@@ -102,6 +104,6 @@ traindf = traindf.merge(alltrain_df, how = 'inner', on = 'household')
 testdf = testdf.merge(alltest_df, how = 'inner', on = 'household')
 
 # Write to disk and clean
-traindf.to_csv('output/supervised_notuning/traindata.csv', index = False)
-testdf.to_csv('output/supervised_notuning/testdata.csv', index = False)
+traindf.to_csv('output/data_notuning/traindata.csv', index = False)
+testdf.to_csv('output/data_notuning/testdata.csv', index = False)
 del(alldf, alltest_df, alltrain_df, imgtype, it, outcomes, split, testdf, traindf)

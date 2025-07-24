@@ -8,6 +8,8 @@ Analysis step 1: Creating SEP indices
 import os
 import pandas as pd
 
+# os.chdir('/run/user/787601554/gvfs/smb-share:server=fs05.isglobal.lan,share=hpc_airpollution/carles/SEP')
+os.chdir('/PROJECTES/AIRPOLLUTION/carles/SEP')
 
 #%% Preprocess questionnaires
 
@@ -75,5 +77,10 @@ indicators['exp_cat2'] = pd.qcut(indicators['exp_all'], 2, labels = ["low", "hig
 indicators['inc_cat2'] = pd.qcut(indicators['inc_all'], 2, labels = ["low", "high"])
 indicators['assets_cat2'] = pd.qcut(indicators['assets'], 2, labels = ["low", "high"])
 
+#%% Categorical 40/40/20 indicators
+indicators['exp_cat3'] = pd.qcut(indicators['exp_all'], q = [0, .4, .8, 1.], labels = ["bottom40", "mid40", "top20"])
+indicators['inc_cat3'] = pd.qcut(indicators['inc_all'], q = [0, .4, .8, 1.], labels = ["bottom40", "mid40", "top20"])
+indicators['assets_cat3'] = pd.qcut(indicators['assets'], q = [0, .4, .8, 1.], labels = ["bottom40", "mid40", "top20"])
+
 #%% Write to disk
-indicators.to_csv("data/clean/indicators.csv", index=False)
+indicators.to_csv('data/clean/indicators.csv', index=False)
